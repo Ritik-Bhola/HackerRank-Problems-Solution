@@ -118,4 +118,35 @@ for i in range(N):
 print(sum(map(int,A)))
 
 
+#Time Delta
+
+from dateutil import parser
+
+for _ in range(int(input())):
+    d1 = parser.parse(input().strip())
+    d2 = parser.parse(input().strip())
+    print(abs(int((d2-d1).total_seconds())))
+
+#Arrays
+
+import numpy
+
+def arrays(arr):
+    # complete this function
+    # use numpy.array
+    return(numpy.array(arr[::-1], float))
+
+arr = input().strip().split(' ')
+result = arrays(arr)
+print(result)
+
+#Concatinate
+
+import numpy as np
+n,m,p = map(int,input().split())
+A = np.array([input().split() for i in range(n)],int)
+B = np.array([input().split() for i in range(m)],int)
+print(np.concatenate((A,B), axis = 0))
+
+
 
