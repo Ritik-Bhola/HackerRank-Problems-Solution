@@ -233,5 +233,308 @@ j.sort(key=lambda row: row[k])
 for m in j:
     print(*m)
 
-#any,all()
+# zipped
 
+n, x = map(int, input().split()) 
+
+sheet = []
+for _ in range(x):
+    sheet.append( map(float, input().split()) ) 
+
+for i in zip(*sheet): 
+    print( sum(i)/len(i) )
+
+# itertools.combinations_with_replacement()
+
+from itertools import combinations_with_replacement
+
+s, k = input().split()
+
+for c in combinations_with_replacement(sorted(s), int(k)):
+    print("".join(c))
+
+#groupby
+
+from itertools import groupby
+print(*[(len(list(c)), int(k)) for k, c in groupby(input())])
+
+#Exception
+
+n = int(input())
+A = (input().split() for i in range(n))
+for i in A:
+    try:
+        print(int(i[0])//int(i[1]))
+    except Exception as e:
+        print(e)
+    
+# incorrent Regex
+
+import re
+
+for _ in range(int(input().strip())):
+        try:
+                re.match(input(), "")
+                print("True")
+        except:
+                print("False")
+
+#collection.orderedDict()
+
+from collections import OrderedDict
+d = OrderedDict()
+for _ in range(int(input())):
+    item, space, quantity = input().rpartition(' ')
+    d[item] = d.get(item, 0) + int(quantity)
+for item, quantity in d.items():
+    print(item, quantity)
+
+# word order
+
+# n = int(input())
+# A = list(input().split() for i in range(n))
+# li = []
+# for i in A:
+    
+#     if i not in li:
+#         li.append(i)
+# print(len(li))
+# for i in li:
+#     print(A.count(i),end=" ")
+    #    or
+n = int(input())
+l = {}
+for i in range(n):
+    k= input()
+    if k in l:
+        l[k]+=1
+    else:
+        l[k] = 1
+print(len(l))
+for i in l:
+    print(l[i], end=" ")
+
+#Deque
+
+from collections import deque
+n = int(input())
+d = deque()
+for i in range(n):
+    A = input().split()
+    if A[0]=="pop":
+        d.pop()
+    elif A[0] == "append":
+        d.append(A[1])
+    elif A[0] == "appendleft":
+        d.appendleft(A[1])
+    elif A[0] == "popleft":
+        d.popleft()
+print(*d)
+
+#Piling up
+
+for t in range(int(input())):
+    input()
+    lst = [int(i) for i in input().split()]
+    min_list = lst.index(min(lst))
+    left = lst[:min_list]
+    right = lst[min_list+1:]
+    if left == sorted(left, reverse=True) and right == sorted(right):
+        print("Yes")
+    else:
+        print("No")
+
+#company logo
+
+from collections import Counter
+
+chars = Counter(input()).items()
+
+for char, n in sorted(chars, key=lambda c: (-c[1], c[0]))[:3]:
+    print(char, n)
+
+
+
+########################
+#find Angle MBC
+
+import math
+AB,BC=int(input()),int(input())
+hype=math.hypot(AB,BC)                      #to calculate hypotenuse
+res=round(math.degrees(math.acos(BC/hype))) #to calculate required angle 
+degree=chr(176)                                #for DEGREE symbol
+print(res,degree, sep='')
+
+#Triange quest
+
+
+for i in range(1,int(input())+1):
+    print  ( int((10**i-1)/9)**2)
+
+
+#Mod Divmod
+
+print('{0}\n{1}\n({0}, {1})'.format(*divmod(int(input()), int(input()))))
+
+# power - mod power
+
+a =int(input())
+b =int(input())
+m =int(input())
+print(pow(a,b))
+print(pow(a,b,m))
+
+#Integer come in all size
+
+a =int(input())
+b =int(input())
+c =int(input())
+d =int(input())
+print((a**b)+(c**d))
+
+#Triange quest
+for i in range(1,int(input())):
+    print((10**(i)//9)*i)
+
+#velidating phone number
+
+import re
+N=int(input())
+for i in range(N):
+
+    if re.match(r'[789]\d{9}$',(input())):   
+        print ('YES')
+    else:  
+        print('NO') 
+
+# Validating and parsing email
+
+import re
+n = int(input())
+for _ in range(n):
+    x, y = input().split(' ')
+    m = re.match(r'<[A-Za-z](\w|-|\.|_)+@[A-Za-z]+\.[A-Za-z]{1,3}>', y)
+    if m:
+        print(x,y)
+
+#Hex color code
+
+import re, sys
+[print(j) for i in sys.stdin for j in re.findall('[\s:](#[a-f0-9]{6}|#[a-f0-9]{3})', i, re.I)]
+
+
+#HTML parser Part-1
+
+from html.parser import HTMLParser
+class MyHTMLParser(HTMLParser):
+    def handle_starttag(self, tag, attrs):        
+        print ('Start :',tag)
+        for ele in attrs:
+            print ('->',ele[0],'>',ele[1])
+            
+    def handle_endtag(self, tag):
+        print ('End   :',tag)
+        
+    def handle_startendtag(self, tag, attrs):
+        print ('Empty :',tag)
+        for ele in attrs:
+            print ('->',ele[0],'>',ele[1])
+            
+MyParser = MyHTMLParser()
+MyParser.feed(''.join([input().strip() for _ in range(int(input()))]))
+
+#HTMLParser part-2
+
+from html.parser import HTMLParser
+class CustomHTMLParser(HTMLParser):
+    def handle_comment(self, data):
+        number_of_line = len(data.split('\n'))
+        if number_of_line>1:
+            print('>>> Multi-line Comment')
+        else:
+            print('>>> Single-line Comment')
+        if data.strip():
+            print(data)
+
+    def handle_data(self, data):
+        if data.strip():
+            print(">>> Data")
+            print(data)
+
+parser = CustomHTMLParser()
+
+n = int(input())
+
+html_string = ''
+for i in range(n):
+    html_string += input().rstrip()+'\n'
+    
+parser.feed(html_string)
+parser.close()
+
+#Detect html tags
+
+from html.parser import HTMLParser
+class MyHTMLParser(HTMLParser):
+    def handle_starttag(self, tag, attrs):
+        print(tag)
+        [print('-> {} > {}'.format(*attr)) for attr in attrs]
+        
+html = '\n'.join([input() for _ in range(int(input()))])
+parser = MyHTMLParser()
+parser.feed(html)
+parser.close()
+
+
+#Validate UID
+
+import re
+
+for _ in range(int(input())):
+    u = ''.join(sorted(input()))
+    try:
+        assert re.search(r'[A-Z]{2}', u)
+        assert re.search(r'\d\d\d', u)
+        assert not re.search(r'[^a-zA-Z0-9]', u)
+        assert not re.search(r'(.)\1', u)
+        assert len(u) == 10
+    except:
+        print('Invalid')
+    else:
+        print('Valid')
+
+#validate craditcard number
+
+import re
+TESTER = re.compile(
+    r"^"
+    r"(?!.*(\d)(-?\1){3})"
+    r"[456]"
+    r"\d{3}"
+    r"(?:-?\d{4}){3}"
+    r"$")
+for _ in range(int(input().strip())):
+    print("Valid" if TESTER.search(input().strip()) else "Invalid")
+
+
+#Validating Postal Codes
+import re
+s=input()
+print (bool(re.match(r'^[1-9][\d]{5}$',s) and len(re.findall(r'(\d)(?=\d\1)',s))<2 ))
+
+#Matrix Script
+
+import re
+
+n, m = map(int, input().split())
+a, b = [], ""
+for _ in range(n):
+    a.append(input())
+
+for z in zip(*a):
+    b += "".join(z)
+
+print(re.sub(r"(?<=\w)([^\w]+)(?=\w)", " ", b))
+
+
+Validating Roman Numerals
