@@ -1,0 +1,105 @@
+# Left Rotation
+
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'rotateLeft' function below.
+#
+# The function is expected to return an INTEGER_ARRAY.
+# The function accepts following parameters:
+#  1. INTEGER d
+#  2. INTEGER_ARRAY arr
+#
+
+def rotateLeft(d, arr):
+    # Write your code here
+    for i in range(d):
+        return arr[d:] + arr[:d]
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    first_multiple_input = input().rstrip().split()
+
+    n = int(first_multiple_input[0])
+
+    d = int(first_multiple_input[1])
+
+    arr = list(map(int, input().rstrip().split()))
+
+    result = rotateLeft(d, arr)
+
+    fptr.write(' '.join(map(str, result)))
+    fptr.write('\n')
+
+    fptr.close()
+
+
+## Sparse array
+
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'matchingStrings' function below.
+#
+# The function is expected to return an INTEGER_ARRAY.
+# The function accepts following parameters:
+#  1. STRING_ARRAY strings
+#  2. STRING_ARRAY queries
+#
+
+def matchingStrings(strings, queries):
+    # Write your code here
+    ar = []
+    for i in queries:
+        count = 0
+        if i in strings:
+            count =strings.count(i)
+        else:
+            count == 0
+        ar.append(count)
+        count = 0
+    return ar
+            
+        
+        
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    strings_count = int(input().strip())
+
+    strings = []
+
+    for _ in range(strings_count):
+        strings_item = input()
+        strings.append(strings_item)
+
+    queries_count = int(input().strip())
+
+    queries = []
+
+    for _ in range(queries_count):
+        queries_item = input()
+        queries.append(queries_item)
+
+    res = matchingStrings(strings, queries)
+
+    fptr.write('\n'.join(map(str, res)))
+    fptr.write('\n')
+
+    fptr.close()
+
+
