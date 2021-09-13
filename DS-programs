@@ -1,0 +1,563 @@
+# Left Rotation
+
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'rotateLeft' function below.
+#
+# The function is expected to return an INTEGER_ARRAY.
+# The function accepts following parameters:
+#  1. INTEGER d
+#  2. INTEGER_ARRAY arr
+#
+
+def rotateLeft(d, arr):
+    # Write your code here
+    for i in range(d):
+        return arr[d:] + arr[:d]
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    first_multiple_input = input().rstrip().split()
+
+    n = int(first_multiple_input[0])
+
+    d = int(first_multiple_input[1])
+
+    arr = list(map(int, input().rstrip().split()))
+
+    result = rotateLeft(d, arr)
+
+    fptr.write(' '.join(map(str, result)))
+    fptr.write('\n')
+
+    fptr.close()
+
+
+## Sparse array
+
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'matchingStrings' function below.
+#
+# The function is expected to return an INTEGER_ARRAY.
+# The function accepts following parameters:
+#  1. STRING_ARRAY strings
+#  2. STRING_ARRAY queries
+#
+
+def matchingStrings(strings, queries):
+    # Write your code here
+    ar = []
+    for i in queries:
+        count = 0
+        if i in strings:
+            count =strings.count(i)
+        else:
+            count == 0
+        ar.append(count)
+        count = 0
+    return ar
+            
+        
+        
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    strings_count = int(input().strip())
+
+    strings = []
+
+    for _ in range(strings_count):
+        strings_item = input()
+        strings.append(strings_item)
+
+    queries_count = int(input().strip())
+
+    queries = []
+
+    for _ in range(queries_count):
+        queries_item = input()
+        queries.append(queries_item)
+
+    res = matchingStrings(strings, queries)
+
+    fptr.write('\n'.join(map(str, res)))
+    fptr.write('\n')
+
+    fptr.close()
+
+
+## dynamic array
+
+a = input().split(' ')
+N, Q = [int(e) for e  in a]
+arrays = [[] for _ in range(N)]
+lastans = 0
+
+def insert(x, y):
+    global lastans
+    arrays[(x ^ lastans) % N].append(y)
+def printnum(x, y):
+    global lastans
+    inst = arrays[(x ^ lastans) % N]
+    lastans = inst[y % len(inst)]
+    print(lastans)
+    
+    
+for i in range(Q):
+    line = [int(e) for e in input().split(' ')]
+    insert(line[1], line[2]) if line[0] == 1 else printnum(line[1], line[2])
+
+## Array Manipulation
+
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'arrayManipulation' function below.
+#
+# The function is expected to return a LONG_INTEGER.
+# The function accepts following parameters:
+#  1. INTEGER n
+#  2. 2D_INTEGER_ARRAY queries
+#
+
+def arrayManipulation(n, queries):
+    arr = [0]*n
+    for i in queries:
+        arr[i[0] - 1] += i[2]
+        if i[1] != len(arr):
+            arr[i[1]] -= i[2]
+    maxval = 0
+    itt = 0
+    print(arr)
+    for q in arr:
+        itt += q
+        if itt > maxval:
+            maxval = itt
+    return maxval
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    first_multiple_input = input().rstrip().split()
+
+    n = int(first_multiple_input[0])
+
+    m = int(first_multiple_input[1])
+
+    queries = []
+
+    for _ in range(m):
+        queries.append(list(map(int, input().rstrip().split())))
+
+    result = arrayManipulation(n, queries)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()
+
+
+## Print the Elements of a Linked list
+
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+class SinglyLinkedListNode:
+    def __init__(self, node_data):
+        self.data = node_data
+        self.next = None
+
+class SinglyLinkedList:
+    def __init__(self):
+        self.head = None
+        self.tail = None
+
+    def insert_node(self, node_data):
+        node = SinglyLinkedListNode(node_data)
+
+        if not self.head:
+            self.head = node
+        else:
+            self.tail.next = node
+
+
+        self.tail = node
+
+
+def printLinkedList(head):
+    node = head
+    while node != None:
+        print(node.data)
+        node = node.next
+        
+
+
+if __name__ == '__main__':
+    llist_count = int(input())
+
+    llist = SinglyLinkedList()
+
+    for _ in range(llist_count):
+        llist_item = int(input())
+        llist.insert_node(llist_item)
+
+    printLinkedList(llist.head)
+
+## Insert a node at the end of linked list
+
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+class SinglyLinkedListNode:
+    def __init__(self, node_data):
+        self.data = node_data
+        self.next = None
+
+class SinglyLinkedList:
+    def __init__(self):
+        self.head = None
+
+def print_singly_linked_list(node, sep, fptr):
+    while node:
+        fptr.write(str(node.data))
+
+        node = node.next
+
+        if node:
+            fptr.write(sep)
+
+# Complete the insertNodeAtTail function below.
+
+#
+# For your reference:
+#
+# SinglyLinkedListNode:
+#     int data
+#     SinglyLinkedListNode next
+#
+#
+def insertNodeAtTail(head, data):
+        if head is None:
+                return SinglyLinkedListNode(data)
+        pnt = head
+        while pnt.next:
+                pnt = pnt.next
+        pnt.next = SinglyLinkedListNode(data)
+        return head
+
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    llist_count = int(input())
+
+    llist = SinglyLinkedList()
+
+    for i in range(llist_count):
+        llist_item = int(input())
+        llist_head = insertNodeAtTail(llist.head, llist_item)
+        llist.head = llist_head
+
+    print_singly_linked_list(llist.head, '\n', fptr)
+    fptr.write('\n')
+
+    fptr.close()
+
+## Insertion at head in linked list
+
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+class SinglyLinkedListNode:
+    def __init__(self, node_data):
+        self.data = node_data
+        self.next = None
+
+class SinglyLinkedList:
+    def __init__(self):
+        self.head = None
+        self.tail = None
+
+def print_singly_linked_list(node, sep, fptr):
+    while node:
+        fptr.write(str(node.data))
+
+        node = node.next
+
+        if node:
+            fptr.write(sep)
+
+# Complete the insertNodeAtHead function below.
+
+#
+# For your reference:
+#
+# SinglyLinkedListNode:
+#     int data
+#     SinglyLinkedListNode next
+#
+#
+def insertNodeAtHead(llist, data):
+    # Write your code here
+    x = SinglyLinkedListNode(data)
+    if (llist == None):
+        llist = x
+    else:
+        new_node = x
+        new_node.next = llist
+        llist = new_node
+    return llist
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    llist_count = int(input())
+
+    llist = SinglyLinkedList()
+
+    for _ in range(llist_count):
+        llist_item = int(input())
+        llist_head = insertNodeAtHead(llist.head, llist_item)
+        llist.head = llist_head
+    
+    print_singly_linked_list(llist.head, '\n', fptr)
+    fptr.write('\n')
+    
+    fptr.close()
+
+## Insert node at specific position in linked list
+
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+class SinglyLinkedListNode:
+    def __init__(self, node_data):
+        self.data = node_data
+        self.next = None
+
+class SinglyLinkedList:
+    def __init__(self):
+        self.head = None
+        self.tail = None
+
+    def insert_node(self, node_data):
+        node = SinglyLinkedListNode(node_data)
+
+        if not self.head:
+            self.head = node
+        else:
+            self.tail.next = node
+
+
+        self.tail = node
+
+def print_singly_linked_list(node, sep, fptr):
+    while node:
+        fptr.write(str(node.data))
+
+        node = node.next
+
+        if node:
+            fptr.write(sep)
+
+#
+# Complete the 'insertNodeAtPosition' function below.
+#
+# The function is expected to return an INTEGER_SINGLY_LINKED_LIST.
+# The function accepts following parameters:
+#  1. INTEGER_SINGLY_LINKED_LIST llist
+#  2. INTEGER data
+#  3. INTEGER position
+#
+
+#
+# For your reference:
+#
+# SinglyLinkedListNode:
+#     int data
+#     SinglyLinkedListNode next
+#
+#
+
+def insertNodeAtPosition(head, data, position):
+    # Write your code here
+    # create a new node
+    new = SinglyLinkedListNode(data)
+    # set a pointer to head in case our initial position is not 0
+    pointer = head
+    # set our counter so we can traverse through SLL
+    counter = 1
+
+    while pointer.next is not None:
+        # and if our counter is equal to the position given
+        if counter == position:
+            # our new node will point to pointer.next
+            new.next = pointer.next
+            # and our pointer.next will be equal to our new node
+            pointer.next = new
+            break
+        # we traverse the list one position at a time until 
+        # counter == position
+        counter += 1
+        pointer = pointer.next
+    # we return the head as requested
+    return head
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    llist_count = int(input())
+
+    llist = SinglyLinkedList()
+
+    for _ in range(llist_count):
+        llist_item = int(input())
+        llist.insert_node(llist_item)
+
+    data = int(input())
+
+    position = int(input())
+
+    llist_head = insertNodeAtPosition(llist.head, data, position)
+
+    print_singly_linked_list(llist_head, ' ', fptr)
+    fptr.write('\n')
+
+    fptr.close()
+
+
+## Delete a Node
+
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+class SinglyLinkedListNode:
+    def __init__(self, node_data):
+        self.data = node_data
+        self.next = None
+
+class SinglyLinkedList:
+    def __init__(self):
+        self.head = None
+        self.tail = None
+
+    def insert_node(self, node_data):
+        node = SinglyLinkedListNode(node_data)
+
+        if not self.head:
+            self.head = node
+        else:
+            self.tail.next = node
+
+
+        self.tail = node
+
+def print_singly_linked_list(node, sep, fptr):
+    while node:
+        fptr.write(str(node.data))
+
+        node = node.next
+
+        if node:
+            fptr.write(sep)
+
+#
+# Complete the 'deleteNode' function below.
+#
+# The function is expected to return an INTEGER_SINGLY_LINKED_LIST.
+# The function accepts following parameters:
+#  1. INTEGER_SINGLY_LINKED_LIST llist
+#  2. INTEGER position
+#
+
+#
+# For your reference:
+#
+# SinglyLinkedListNode:
+#     int data
+#     SinglyLinkedListNode next
+#
+#
+
+def deleteNode(head, position):
+    # Write your code here
+    currentPos = 0
+    prevNode = None
+    node = head
+    while currentPos < position:
+        currentPos = currentPos+1
+        prevNode = node
+        node = node.next
+    if prevNode is not None:
+        prevNode.next = node.next
+        return head
+    else:
+        n = node.next
+        node.next = None
+        return n
+    
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    llist_count = int(input())
+
+    llist = SinglyLinkedList()
+
+    for _ in range(llist_count):
+        llist_item = int(input())
+        llist.insert_node(llist_item)
+
+    position = int(input())
+
+    llist1 = deleteNode(llist.head, position)
+
+    print_singly_linked_list(llist1, ' ', fptr)
+    fptr.write('\n')
+
+    fptr.close()
